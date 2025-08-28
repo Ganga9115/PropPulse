@@ -12,7 +12,7 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar-nav">
-        <Link to="/tenant" className="sidebar-link">
+        <Link to="/rent" className="sidebar-link">
           <FaHome className="sidebar-icon" /> My Lease/Rent
         </Link>
         <Link to="/maintenance" className="sidebar-link">
