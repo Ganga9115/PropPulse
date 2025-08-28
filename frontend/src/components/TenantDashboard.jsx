@@ -1,3 +1,4 @@
+import React from "react";
 import Sidebar from "./Sidebar";
 import "../styles/TenantDashboard.css";
 import leaseImg from "../assets/lease.png";
@@ -18,16 +19,15 @@ const TenantDashboard = () => {
           </p>
         </div>
 
-<div className="dashboard-info">
-        <div className="welcome-box">
+        <div className="dashboard-info">
+          <div className="welcome-box">
             <h2>👋 Welcome back!!</h2>
             <p>
-            Use the side menu to manage agreements, submit service requests, and view
-            payment history with ease.
+              Use the side menu to manage agreements, submit service requests, and view
+              payment history with ease.
             </p>
+          </div>
         </div>
-        </div>
-
 
         {/* Info Boxes with Icons */}
         <div className="info-box">
@@ -47,24 +47,32 @@ const TenantDashboard = () => {
 
         {/* Dashboard Cards */}
         <div className="dashboard-cards">
+          {/* My Lease/Rent Card */}
           <div className="card">
-            <img src={leaseImg} alt="lease" />
-            <h3>MY LEASE/RENT</h3>
+            <a href="/rent" className="card-link">
+              <img src={leaseImg} alt="lease" />
+              <h3>MY LEASE/RENT</h3>
+            </a>
           </div>
 
+          {/* Maintenance Card */}
           <div className="card">
-            <img src={maintenanceImg} alt="maintenance" />
-            <h3>MAINTENANCE</h3>
+            <a href="/maintenance" className="card-link">
+              <img src={maintenanceImg} alt="maintenance" />
+              <h3>MAINTENANCE</h3>
+            </a>
           </div>
 
+          {/* Payment Card */}
           <div className="card">
-            <img src={paymentImg} alt="payment" />
-            <h3>PAYMENT</h3>
+            <a href="/payment" className="card-link">
+              <img src={paymentImg} alt="payment" />
+              <h3>PAYMENT</h3>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    
   );
 };
 
