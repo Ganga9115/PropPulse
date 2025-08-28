@@ -1,10 +1,12 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate hook
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // 2. Initialize the navigate function
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,10 @@ const LoginPage = () => {
       // Save JWT token in localStorage
       localStorage.setItem('token', res.data.token);
       setMessage(`Welcome, ${res.data.user.username}`);
-      // You can redirect user to dashboard or homepage here
+      
+      // 3. Navigate to the SelectUnit page after successful login
+      navigate('/select-unit');
+
     } catch (err) {
       setMessage(err.response?.data?.message || 'Error occurred');
     }

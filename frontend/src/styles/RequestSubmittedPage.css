@@ -1,0 +1,85 @@
+/* Container for the entire page content, centered within the main layout */
+.request-submitted-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 5rem; /* Add some top padding for better vertical alignment */
+}
+
+/* The card that contains the icon, text, and button */
+.status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #d1d8e0;
+  border-radius: 12px;
+  padding: 3rem 4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Checkmark icon styling */
+.checkmark-icon-container {
+  width: 150px; /* Increased size to match the image */
+  height: 150px;
+  margin-bottom: 2rem;
+  position: relative;
+  border-radius: 50%; /* Make it a circle */
+}
+
+/* The SVG for the checkmark icon */
+.checkmark-icon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #007bff; /* Main color of the icon */
+}
+
+/* The checkmark path itself */
+.checkmark-icon path {
+  fill: white; /* Color of the checkmark */
+}
+
+/* The blue background behind the checkmark */
+.checkmark-icon-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3b5998; /* The dark blue color from the image */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* The "Request Submitted Successfully" message */
+.status-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 2rem;
+}
+
+/* The "Done" button styling */
+.done-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5d5d81; /* A purple-grey color */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.done-button:hover {
+  background-color: #4a4a6e; /* Darker on hover */
+}

@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa; /* Light gray background for the entire page */
+}
+
+/* Sidebar styling for the new light theme */
+.sidebar {
+  width: 250px;
+  background-color: #ffffff; /* White background for the sidebar */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05); /* Softer shadow */
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0; /* Lighter divider line */
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #e6f0ff; /* Light blue hover/active color */
+  color: #007bff; /* Bright blue text color */
+}
+
+.icon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  color: #888; /* Icon color for non-active state */
+}
+
+.menu-item.active .icon {
+  color: #007bff; /* Active icon color */
+}
+
+.sidebar-bottom {
+  border-top: 1px solid #e0e0e0; /* Lighter divider line */
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+.bottom-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #333;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bottom-button:hover {
+  background-color: #e6f0ff;
+  color: #007bff;
+}
+
+.bottom-button.logout {
+  color: #dc3545; /* Red for logout button */
+}
+
+.bottom-button.logout:hover {
+  background-color: #ffebeb;
+  color: #dc3545;
+}
+
+/* Main content area */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #f5f7fa; /* Consistent light gray background */
+  overflow-y: auto;
+}
