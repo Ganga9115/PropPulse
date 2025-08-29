@@ -1,7 +1,16 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import homeImage from "../assets/homeImage.png";
+import img1 from "../assets/img1.png"
+import img2 from "../assets/img2.png"
+import img3 from "../assets/img3.png"
+import img4 from "../assets/img4.png"
+import img5 from "../assets/img5.png"
+import img6 from "../assets/img6.png"
+import img7 from "../assets/img7.png"
+import img8 from "../assets/img8.png"
 
-
+import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 const LandingPage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -56,7 +65,7 @@ const LandingPage = () => {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center" style={{ backgroundImage: 'url(https://placehold.co/1920x1080/4f3a74/ffffff?text=Property+Management+Hero)' }}>
+        <section className="relative h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${homeImage})`}}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="container mx-auto px-4 z-10 text-white text-center md:text-left">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
@@ -79,95 +88,126 @@ const LandingPage = () => {
 
         {/* Platform Highlights Section */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-800">
-              PLATFORM HIGHLIGHTS
-            </h2>
-            <p className="mt-2 text-gray-600 max-w-3xl mx-auto">
-              All-in-one property management redefined. Explore the core modules that keep your property ecosystem efficient, scalable, and future-ready.
-            </p>
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Card 1 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <FaHome className="text-3xl text-blue-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">Leases/Rent</h3>
-              </div>
-              {/* Card 2 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <FaChartBar className="text-3xl text-red-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">Analytics & Reporting</h3>
-              </div>
-              {/* Card 3 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <MdReportProblem className="text-3xl text-purple-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">Compliance & Alerts</h3>
-              </div>
-              {/* Card 4 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <MdOutlineArchitecture className="text-3xl text-green-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">Scalable Architecture</h3>
-              </div>
-              {/* Card 5 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <FaUserFriends className="text-3xl text-yellow-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">CRM & Communication</h3>
-              </div>
-              {/* Card 6 */}
-              <div className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform transition duration-300 hover:scale-110">
-                  <MdFeedback className="text-3xl text-orange-600" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-800">Customer Feedback</h3>
-              </div>
+      <div className="container mx-auto px-4 text-center">
+        {/* Header Section */}
+        <h2 className="text-2xl md:text-4xl font-bold text-[#6771DE]">
+          PLATFORM HIGHLIGHTS
+        </h2>
+        <p className="mt-2 text-gray-600 max-w-3xl mx-auto">
+          All-in-one property management redefined. Explore the core modules that keep your property ecosystem efficient, scalable, and future-ready.
+        </p>
+
+        {/* Cards Grid */}
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Leases/Rent Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img3} alt="Leases/Rent icon" className="w-full h-full object-contain" />
             </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">Leases/Rent</h3>
           </div>
-        </section>
+
+          {/* Analytics & Reporting Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img4} alt="Analytics & Reporting icon" className="w-full h-full object-contain" />
+            </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">Analytics & Reporting</h3>
+          </div>
+
+          {/* Compliance & Alerts Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img5} alt="Compliance & Alerts icon" className="w-full h-full object-contain" />
+            </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">Compliance & Alerts</h3>
+          </div>
+
+          {/* Scalable Architecture Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img6} alt="Scalable Architecture icon" className="w-full h-full object-contain" />
+            </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">Scalable Architecture</h3>
+          </div>
+
+          {/* CRM & Communication Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img7} alt="CRM & Communication icon" className="w-full h-full object-contain" />
+            </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">CRM & Communication</h3>
+          </div>
+
+          {/* Customer Feedback Card */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200">
+            <div className="w-24 h-24 mb-4">
+              <img src={img8} alt="Customer Feedback icon" className="w-full h-full object-contain" />
+            </div>
+            <h3 className="text-lg font-semibold text-[#6771DE]">Customer Feedback</h3>
+          </div>
+        </div>
+      </div>
+    </section>
 
         {/* Maps Section */}
-        <section className="py-16 bg-gray-100">
-          <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left side with two cards */}
-            <div className="flex flex-col space-y-6">
-              <div className="flex items-center space-x-4 bg-white p-6 rounded-lg shadow-lg">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
-                  <FaMapMarkerAlt className="text-2xl" />
-                </div>
-                <span className="text-lg font-semibold text-gray-800">Interactive Maps</span>
-              </div>
-              <div className="flex items-center space-x-4 bg-white p-6 rounded-lg shadow-lg">
-                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
-                  <FaTag className="text-2xl" />
-                </div>
-                <span className="text-lg font-semibold text-gray-800">Deals/offers</span>
-              </div>
-            </div>
-            {/* Right side with an illustration */}
-            <div className="flex justify-center lg:justify-end">
-              <img src="https://placehold.co/500x350/ffffff/ffffff?text=Illustration+Placeholder" alt="Illustration" className="w-full max-w-md h-auto rounded-lg" />
-            </div>
-          </div>
-        </section>
-      </main>
+<section className="bg-blue-200 min-h-screen flex flex-col items-center justify-center p-8">
+      {/* Header Text */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+          Discover, navigate, and unlock exclusive offers with our Interactive Mall Map!
+        </h1>
+        <p className="text-lg md:text-xl text-blue-700">
+          Tap the map, spot the deal, grab the offer
+        </p>
+      </div>
 
-      {/* Footer (optional) */}
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto text-center text-sm">
-          &copy; 2024 Property Management E-Mall. All Rights Reserved.
+      {/* Cards Container */}
+      <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 max-w-4xl w-full justify-center mb-12">
+        {/* Interactive Map Card */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center text-center w-full md:w-1/2">
+          <div className="mb-4">
+            <img 
+              src={img1} 
+              alt="Man with a magnifying glass over a map pin" 
+              className="w-48 h-48 object-contain" 
+            />
+          </div>
+          <h2 className="text-2xl font-semibold text-blue-800">
+            Interactive Map
+          </h2>
         </div>
-      </footer>
+
+        {/* Deals/Offers Card */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center text-center w-full md:w-1/2">
+          <div className="mb-4">
+            <img 
+              src={img2} 
+              alt="Person holding a coupon and shopping bag" 
+              className="w-48 h-48 object-contain" 
+            />
+          </div>
+          <h2 className="text-2xl font-semibold text-purple-800">
+            Deals/Offers
+          </h2>
+        </div>
+      </div>
+
+      {/* Contact Information */}
+      <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-12 text-gray-700">
+        <div className="flex items-center">
+          <FaPhoneAlt className="text-2xl mr-3 text-gray-600" />
+          <span className="text-lg font-medium">+91 4445789040</span>
+        </div>
+        <div className="flex items-center">
+          <FaEnvelope className="text-2xl mr-3 text-gray-600" />
+          <span className="text-lg font-medium">propulseteam@gmail.com</span>
+        </div>
+      </div>
+    </section>
+      </main>
     </div>
   );
 };
 
 export default LandingPage;
-

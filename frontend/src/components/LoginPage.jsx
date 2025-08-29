@@ -1,46 +1,47 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate hook
+import { useNavigate } from 'react-router-dom'; 
+import { useEffect } from 'react';
+import login from "../assets/login.png"
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // 2. Initialize the navigate function
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); 
     try {
       const res = await axios.post('http://localhost:5000/login', {
         email,
-        password
+        password,
       });
-      // Save JWT token in localStorage
       localStorage.setItem('token', res.data.token);
       setMessage(`Welcome, ${res.data.user.username}`);
-      
-      // 3. Navigate to the SelectUnit page after successful login
       navigate('/select-unit');
-
     } catch (err) {
-      setMessage(err.response?.data?.message || 'Error occurred');
+      setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen font-sans bg-gray-900 text-gray-800">
-
-      {/* Left side illustration */}
-      <div className="flex-1 bg-gray-200 flex items-center justify-center p-4">
+    <div className="flex flex-col md:flex-row min-h-screen font-sans">
+      <div className="flex-1 bg-[#CBE0F8] flex items-center justify-center p-4 rounded-lg">
         <img
-          src="https://placehold.co/600x400/b0c1db/b0c1db?text="
-          alt="Illustration"
-          className="w-full max-w-lg h-auto"
+          src={login}
+          alt="Login illustration"
+          className="w-full max-w-lg h-auto rounded-xl shadow-lg"
         />
       </div>
-
-      {/* Right side form */}
-      <div className="flex-1 bg-gray-900 flex items-center justify-center p-4">
+      <div className="flex-1 bg-white flex items-center justify-center p-4">
         <div className="bg-white rounded-xl shadow-2xl p-8 max-w-sm w-full md:max-w-md">
           <div className="flex flex-col items-center mb-6">
             <div className="flex items-center justify-center w-16 h-16 bg-white rounded-xl shadow-lg mb-2">
@@ -51,9 +52,7 @@ const LoginPage = () => {
             <h2 className="text-2xl font-bold text-gray-800 mt-2">Login Now</h2>
             <p className="text-sm text-gray-500 text-center mt-1">Welcome back! Login to access our exclusive contents</p>
           </div>
-
           {message && <p className="text-red-500 text-center mb-3">{message}</p>}
-
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -71,12 +70,12 @@ const LoginPage = () => {
             />
             <button
               type="submit"
+              disabled={isLoading} 
               className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
             >
-              LOGIN
+              {isLoading ? 'LOADING...' : 'LOGIN'}
             </button>
           </form>
-
           <div className="mt-6 text-center text-sm">
             <span className="text-gray-500">Don't have an account? </span>
             <a href="/signup" className="text-blue-600 font-semibold hover:underline">
@@ -87,5 +86,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-}
+};
+
 export default LoginPage;
