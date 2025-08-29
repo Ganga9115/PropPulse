@@ -1,9 +1,8 @@
-/* General container for the page content */
 .select-unit-container {
   padding: 2rem;
+  background-color: #f5f7fa;
 }
 
-/* Header section with blue background */
 .header-section {
   background-color: #d1d8e0;
   border-radius: 12px;
@@ -20,125 +19,70 @@
 
 .header-subtitle {
   font-size: 1.1rem;
-  color: #007bff;
+  color: #555;
   margin-top: 0.5rem;
 }
 
-/* Section heading for the unit selection */
 .section-heading {
   font-size: 1.5rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-/* Grid for the unit cards, creating a responsive layout */
 .unit-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  justify-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-/* Styling for each individual unit card */
 .unit-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   background-color: #fff;
-  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-align: center;
 }
 
 .unit-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling for the circular image at the top of the card */
 .unit-image {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  border: 4px solid #d8dcdf;
+  object-fit: cover;
   margin-bottom: 1rem;
 }
 
-/* Styling for the unit name text */
 .unit-name {
   font-size: 1.1rem;
   font-weight: 600;
   color: #333;
-  margin: 0 0 1rem;
+  margin: 0;
 }
 
-/* Styling for the SELECT button */
 .select-button {
-  width: 100%;
-  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
   border: none;
   border-radius: 8px;
   background-color: #007bff;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .select-button:hover {
   background-color: #0056b3;
-}
-
-/* New style for the selected button */
-.select-button.selected {
-  background-color: #28a745; /* A green color to indicate selection */
-  cursor: default;
-}
-
-/* Request Service button */
-.request-service-button {
-  display: block;
-  width: 50%;
-  margin: 3rem auto 0;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #8c8c8c; /* Greyed out color */
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: not-allowed;
-  transition: background-color 0.3s ease;
-}
-
-/* Enable the button when a unit is selected */
-.request-service-button:not(.disabled) {
-  background-color: #6a1b9a; /* Dark purple color */
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
-}
-
-.request-service-button:not(.disabled):hover {
-  background-color: #4a148c;
-  box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .unit-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-}
-
-@media (max-width: 480px) {
-  .unit-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 }

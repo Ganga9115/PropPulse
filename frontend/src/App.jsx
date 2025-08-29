@@ -12,6 +12,7 @@ import MaintenanceView from "./components/MaintenanceView";
 import MaintenanceRequest from "./components/MaintenanceRequest";
 import Rent from "./components/Rent"; 
 import "./index.css";
+import UnitDetailsPage from './components/UnitDetailsPage';
 
 export default function App() {
   return (
@@ -24,11 +25,12 @@ export default function App() {
         <Route path="/request-form" element={<RequestForm />} />
         <Route path="/agreement" element={<AgreementPage />} />
         <Route path="/request-submitted" element={<RequestSubmittedPage />} />
+        <Route path="/dashboard" element={<TenantDashboard />} />
+        <Route path="/maintenance" element={<MaintenanceView />} />
+        <Route path="/maintenance/new" element={<MaintenanceRequest />} />
+        <Route path="/rent" element={<Rent />} /> 
+        <Route path="/unit-details" element={<UnitDetailsPage />} />
       </Route>
-      <Route path="/dashboard" element={<TenantDashboard />} />
-      <Route path="/maintenance" element={<MaintenanceView />} />
-      <Route path="/maintenance/new" element={<MaintenanceRequest />} />
-       <Route path="/rent" element={<Rent />} /> 
     </Routes>
   );
 }
