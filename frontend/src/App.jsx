@@ -18,10 +18,12 @@ import Sidebar from './components/Sidebar';
 import "./index.css";
 import SuccessfulPayment from './components/SuccessfulPayment';
 import UnitDetailsPage from './components/UnitDetailsPage';
+import Contact from "./components/Contact";  
 
 export default function App() {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
@@ -38,8 +40,9 @@ export default function App() {
       <Route path="/request-form" element={<div className="flex"><Sidebar /><RequestForm /></div>} />
       <Route path="/agreement" element={<div className="flex"><Sidebar /><AgreementPage /></div>} />
       <Route path="/request-submitted" element={<div className="flex"><Sidebar /><RequestSubmittedPage /></div>} />
-      <Route path="/successful-payment" element={<div className="flex"><Sidebar /><SuccessfulPayment/></div>} />
-      <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage/></div>} />
+      <Route path="/successful-payment" element={<div className="flex"><Sidebar /><SuccessfulPayment /></div>} />
+      <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage /></div>} />
+      <Route path="/contact" element={<div className="flex"><Sidebar /><Contact /></div>} /> 
     </Routes>
   );
 }
