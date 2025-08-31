@@ -3,32 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/SelectUnitPage.css';
 
 const units = [
-  { id: 1, name: 'SHOP A - F(4)', image: 'https://i.pinimg.com/736x/10/39/6e/10396e3cddd5f369ce7c72f3a4158a44.jpg' },
-  { id: 2, name: 'SHOP B - F(2)', image: 'https://i.pinimg.com/736x/84/e8/5d/84e85dc222e7da57bf9b3b895ea1d6f5.jpg' },
-  { id: 3, name: 'SHOP A - F(2)', image: 'https://i.pinimg.com/736x/d4/95/35/d495354b9d6f9ee9f0cabcb43ffbbe6a.jpg' },
-  { id: 4, name: 'SHOP L - F(1)', image: 'https://i.pinimg.com/736x/55/aa/7a/55aa7a889ae4fdb25443d70f26bd0bb0.jpg' },
-  { id: 5, name: 'SHOP C - F(2)', image: 'https://i.pinimg.com/1200x/17/5e/d9/175ed9290d761a8754d6b4a6eca1aa3d.jpg' },
-  { id: 6, name: 'SHOP A - F(3)', image: 'https://i.pinimg.com/1200x/66/d0/42/66d042437014e0cd0826a239673e3893.jpg' },
-  { id: 7, name: 'SHOP A - F(2)', image: 'https://i.pinimg.com/1200x/14/80/99/148099cd4f6c7e9ddde8ce66934c428e.jpg' },
-  { id: 8, name: 'SHOP L - F(1)', image: 'https://i.pinimg.com/736x/a7/5b/c1/a75bc11c28afc141b3522b020bbf0dfa.jpg' },
-  { id: 9, name: 'SHOP C - F(2)', image: 'https://i.pinimg.com/736x/97/57/eb/9757eb75504aae98401960ab0f76df24.jpg' },
-  { id: 10, name: 'SHOP A - F(3)', image: 'https://i.pinimg.com/736x/bc/d0/79/bcd079aba9738cee1c6d6b4a97747e5a.jpg' },
+  { id: 1, name: 'SHOP A - F(4)', image: 'https://i.pinimg.com/736x/10/39/6e/10396e3cddd5f369ce7c72f3a4158a44.jpg', details: { shopName: "Shop A", floorNo: "4th", rentalPrice: "10000/-", unitSize: "450 sq.ft", block: "mall wing block", leasePeriod: "1st jan 2025 - 25th mar 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+  { id: 2, name: 'SHOP B - F(2)', image: 'https://i.pinimg.com/736x/84/e8/5d/84e85dc222e7da57bf9b3b895ea1d6f5.jpg', details: { shopName: "Shop B", floorNo: "2nd", rentalPrice: "12000/-", unitSize: "500 sq.ft", block: "mall wing block", leasePeriod: "1st feb 2025 - 25th apr 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+  { id: 3, name: 'SHOP A - F(2)', image: 'https://i.pinimg.com/736x/41/24/07/4124073b714caf838cd606cf0b30e877.jpg', details: { shopName: "Shop C", floorNo: "2nd", rentalPrice: "15000/-", unitSize: "600 sq.ft", block: "mall wing block", leasePeriod: "1st mar 2025 - 25th may 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+  { id: 4, name: 'SHOP L - F(1)', image: 'https://i.pinimg.com/736x/55/aa/7a/55aa7a889ae4fdb25443d70f26bd0bb0.jpg', details: { shopName: "Shop L", floorNo: "1st", rentalPrice: "9000/-", unitSize: "400 sq.ft", block: "mall wing block", leasePeriod: "1st apr 2025 - 25th jun 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+  { id: 5, name: 'SHOP C - F(2)', image: 'https://i.pinimg.com/736x/70/a4/78/70a478e7019b951c1a13840cf5068f6d.jpg', details: { shopName: "Shop C", floorNo: "2nd", rentalPrice: "11000/-", unitSize: "480 sq.ft", block: "mall wing block", leasePeriod: "1st may 2025 - 25th jul 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+  { id: 6, name: 'SHOP A - F(3)', image: 'https://i.pinimg.com/736x/b8/cd/dd/b8cddde0921c2b9c6298bdb49eb08531.jpg', details: { shopName: "Shop A", floorNo: "3rd", rentalPrice: "13000/-", unitSize: "550 sq.ft", block: "mall wing block", leasePeriod: "1st jun 2025 - 25th aug 2025", status: "Active", paymentDueDate: "1st week of every month" } },
+
 ];
 
 const SelectUnitPage = () => {
   const navigate = useNavigate();
-  const [selectedUnitId, setSelectedUnitId] = useState(null);
 
-  const handleUnitSelect = (unitId) => {
-    setSelectedUnitId(unitId);
-  };
-
-  const handleRequestServiceClick = () => {
-    if (selectedUnitId !== null) {
-      navigate('/request-form');
-    } else {
-      alert('Please select a unit before proceeding.');
-    }
+  const handleUnitSelect = (unit) => {
+    navigate('/unit-details', { state: { selectedUnit: unit } });
   };
 
   return (
@@ -46,22 +34,14 @@ const SelectUnitPage = () => {
             <img src={unit.image} alt={unit.name} className="unit-image" />
             <p className="unit-name">{unit.name}</p>
             <button
-              className={`select-button ${selectedUnitId === unit.id ? 'selected' : ''}`}
-              onClick={() => handleUnitSelect(unit.id)}
+              className="select-button"
+              onClick={() => handleUnitSelect(unit)}
             >
               SELECT
             </button>
           </div>
         ))}
       </div>
-      
-      <button 
-        className={`request-service-button ${selectedUnitId === null ? 'disabled' : ''}`}
-        onClick={handleRequestServiceClick}
-        disabled={selectedUnitId === null}
-      >
-        Request Service
-      </button>
     </div>
   );
 };

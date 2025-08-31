@@ -14,9 +14,10 @@ import Rent from "./components/Rent";
 import InteractiveMallMap from "./components/InteractiveMallMap";
 import DealsOffers from "./components/DealsOffers";
 import Payment from "./components/Payment";
-import Sidebar from './components/Sidebar'; // Assuming you have a Sidebar component
+import Sidebar from './components/Sidebar';
 import "./index.css";
-import SuccessfulPayment from './components/SucessfulPayment';
+import SuccessfulPayment from './components/SuccessfulPayment';
+import UnitDetailsPage from './components/UnitDetailsPage';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/agreement" element={<div className="flex"><Sidebar /><AgreementPage /></div>} />
       <Route path="/request-submitted" element={<div className="flex"><Sidebar /><RequestSubmittedPage /></div>} />
       <Route path="/successful-payment" element={<div className="flex"><Sidebar /><SuccessfulPayment/></div>} />
+      <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage/></div>} />
     </Routes>
   );
 }
