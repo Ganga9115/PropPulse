@@ -11,6 +11,8 @@ import TenantDashboard from "./components/TenantDashboard";
 import MaintenanceView from "./components/MaintenanceView";
 import MaintenanceRequest from "./components/MaintenanceRequest";
 import Rent from "./components/Rent"; 
+import InteractiveMallMap from "./components/InteractiveMallMap";
+import DealsOffers from "./components/DealsOffers";
 import "./index.css";
 import UnitDetailsPage from './components/UnitDetailsPage';
 
@@ -20,6 +22,8 @@ export default function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/mall-maps" element={<InteractiveMallMap />} />
+        <Route path="/deals-offers" element={< DealsOffers />} />
       <Route element={<AppLayout />}>
         <Route path="/select-unit" element={<SelectUnitPage />} />
         <Route path="/request-form" element={<RequestForm />} />
