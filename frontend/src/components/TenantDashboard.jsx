@@ -9,7 +9,6 @@ import { FaFileContract, FaMoneyBillWave, FaTools } from "react-icons/fa";
 const TenantDashboard = () => {
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar />
 
       <div className="dashboard">
         <div className="dashboard-header">
