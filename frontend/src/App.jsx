@@ -1,20 +1,24 @@
+import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
-import LoginPage from "./components/LoginPage";
-import SignUpPage from "./components/SignUpPage";
-import SelectUnitPage from "./components/SelectUnitPage";
-import RequestForm from "./components/RequestForm";
-import AppLayout from "./components/AppLayout";
-import AgreementPage from "./components/AgreementPage";
-import RequestSubmittedPage from "./components/RequestSubmittedPage";
+import LandingPage from './components/LandingPage';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
+import SelectUnitPage from './components/SelectUnitPage';
+import RequestForm from './components/RequestForm';
+import AgreementPage from './components/AgreementPage';
+import RequestSubmittedPage from './components/RequestSubmittedPage';
 import TenantDashboard from "./components/TenantDashboard";
 import MaintenanceView from "./components/MaintenanceView";
 import MaintenanceRequest from "./components/MaintenanceRequest";
-import Rent from "./components/Rent";
-import UnitDetailsPage from "./components/UnitDetailsPage";
-import Contact from "./components/Contact"; // <- new page
-
+import Rent from "./components/Rent"; 
+import InteractiveMallMap from "./components/InteractiveMallMap";
+import DealsOffers from "./components/DealsOffers";
+import Payment from "./components/Payment";
+import Sidebar from './components/Sidebar';
 import "./index.css";
+import SuccessfulPayment from './components/SuccessfulPayment';
+import UnitDetailsPage from './components/UnitDetailsPage';
+import Contact from "./components/Contact";  
 
 export default function App() {
   return (
@@ -23,20 +27,22 @@ export default function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-
-      {/* Protected/Layout Routes */}
-     
-        <Route path="/select-unit" element={<SelectUnitPage />} />
-        <Route path="/request-form" element={<RequestForm />} />
-        <Route path="/agreement" element={<AgreementPage />} />
-        <Route path="/request-submitted" element={<RequestSubmittedPage />} />
-        <Route path="/dashboard" element={<TenantDashboard />} />
-        <Route path="/maintenance" element={<MaintenanceView />} />
-        <Route path="/maintenance/new" element={<MaintenanceRequest />} />
-        <Route path="/rent" element={<Rent />} />
-        <Route path="/unit-details" element={<UnitDetailsPage />} />
-        <Route path="/contact" element={<Contact/>} />
-    
+      <Route path="/mall-maps" element={<InteractiveMallMap />} />
+      <Route path="/deals-offers" element={<DealsOffers />} />
+       
+      {/* Routes with Sidebar */}
+      <Route path="/dashboard" element={<div className="flex"><Sidebar /><TenantDashboard /></div>} />
+      <Route path="/maintenance" element={<div className="flex"><Sidebar /><MaintenanceView /></div>} />
+      <Route path="/maintenance/new" element={<div className="flex"><Sidebar /><MaintenanceRequest /></div>} />
+      <Route path="/rent" element={<div className="flex"><Sidebar /><Rent /></div>} /> 
+      <Route path="/payment" element={<div className="flex"><Sidebar /><Payment /></div>} />
+      <Route path="/select-unit" element={<div className="flex"><Sidebar /><SelectUnitPage /></div>} />
+      <Route path="/request-form" element={<div className="flex"><Sidebar /><RequestForm /></div>} />
+      <Route path="/agreement" element={<div className="flex"><Sidebar /><AgreementPage /></div>} />
+      <Route path="/request-submitted" element={<div className="flex"><Sidebar /><RequestSubmittedPage /></div>} />
+      <Route path="/successful-payment" element={<div className="flex"><Sidebar /><SuccessfulPayment /></div>} />
+      <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage /></div>} />
+      <Route path="/contact" element={<div className="flex"><Sidebar /><Contact /></div>} /> 
     </Routes>
   );
 }

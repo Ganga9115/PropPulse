@@ -8,9 +8,6 @@ const MaintenanceView = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="maintenance-container">
-      <Sidebar />
-
       <div className="dashboard">
         {/* Blue Header */}
         <div className="dashboard-header">
@@ -89,7 +86,7 @@ const MaintenanceView = () => {
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 };
 

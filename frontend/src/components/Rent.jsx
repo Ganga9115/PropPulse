@@ -22,8 +22,7 @@ const Rent = () => {
   };
 
   return (
-    <div className="rent-container">
-      <Sidebar />
+
       <div className="rent-content">
         {/* Header */}
         <div className="dashboard-header">
@@ -115,7 +114,7 @@ const Rent = () => {
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

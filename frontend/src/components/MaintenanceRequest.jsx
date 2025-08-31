@@ -33,11 +33,6 @@ const Maintenance2 = () => {
   };
 return (
   <div className="maintenance-layout">
-    {/* Sidebar fixed on the left */}
-    <Sidebar />
-
-    {/* Main content on the right */}
-    <div className="maintenance2-container">
       <div className="dashboard">
         <div className="dashboard-header">
           <h1>Hello Tenant!</h1>
@@ -158,7 +153,7 @@ return (
         </div>
       </div>
     </div>
-  </div>
+
 );
 
 };
