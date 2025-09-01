@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
@@ -16,8 +15,9 @@ import DealsOffers from "./components/DealsOffers";
 import Payment from "./components/Payment";
 import Sidebar from './components/Sidebar';
 import "./index.css";
-import SuccessfulPayment from './components/SuccessfulPayment';
+import SuccessfulPayment from "./components/SuccessfulPayment"
 import UnitDetailsPage from './components/UnitDetailsPage';
+
 
 export default function App() {
   return (
