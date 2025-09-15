@@ -5,10 +5,11 @@
 }
 
 .agreement-header {
-  background-color: #d1d8e0;
+  background-color: #dce8f8;
+  padding: 30px 44px;
   border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .agreement-title {
@@ -50,7 +51,7 @@
 }
 
 .bullet {
-  color: #007bff;
+  color: #738fbc;
   font-size: 1.5rem;
   line-height: 1;
   margin-right: 1rem;
@@ -60,6 +61,15 @@
   font-size: 1rem;
   color: #333;
   line-height: 1.5;
+}
+.error-message {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .agreement-footer {

@@ -1,14 +1,49 @@
-/* Container for the entire page content, centered within the main layout */
-.request-submitted-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ===== Overall Page ===== */
+.request-submitted-page-container {
   width: 100%;
-  height: 100%;
-  padding-top: 5rem; /* Add some top padding for better vertical alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
 }
 
-/* The card that contains the icon, text, and button */
+/* ===== Header (already styled globally, but keep spacing) ===== */
+.form-header-section {
+  width: 100%;
+  background-color: #d1d8e0;
+  padding: 1rem 2rem;
+  text-align: left;
+}
+
+.form-header-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.form-header-subtitle {
+  color: #007bff;
+  margin-top: 0.25rem;
+}
+
+/* ===== Heading below header ===== */
+.form-section-heading {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #444;
+  margin: 2rem 0 1rem; /* space between header and card */
+}
+
+/* ===== Card Container ===== */
+.status-card-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ===== Status Card ===== */
 .status-card {
   display: flex;
   flex-direction: column;
@@ -18,33 +53,31 @@
   padding: 3rem 4rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  max-width: 450px;
+  width: 100%;
 }
 
-/* Checkmark icon styling */
+/* ===== Checkmark Icon ===== */
 .checkmark-icon-container {
-  width: 150px; /* Increased size to match the image */
+  width: 150px;
   height: 150px;
   margin-bottom: 2rem;
   position: relative;
-  border-radius: 50%; /* Make it a circle */
+  border-radius: 50%;
 }
 
-/* The SVG for the checkmark icon */
 .checkmark-icon {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  fill: #007bff; /* Main color of the icon */
 }
 
-/* The checkmark path itself */
 .checkmark-icon path {
-  fill: white; /* Color of the checkmark */
+  fill: white;
 }
 
-/* The blue background behind the checkmark */
 .checkmark-icon-container::before {
   content: '';
   position: absolute;
@@ -52,12 +85,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #3b5998; /* The dark blue color from the image */
+  background-color: #3b5998;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* The "Request Submitted Successfully" message */
+/* ===== Success Message ===== */
 .status-message {
   font-size: 1.5rem;
   font-weight: 600;
@@ -65,13 +98,13 @@
   margin-bottom: 2rem;
 }
 
-/* The "Done" button styling */
+/* ===== Done Button ===== */
 .done-button {
   width: 100%;
   padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
-  background-color: #5d5d81; /* A purple-grey color */
+  background-color: #5d5d81;
   color: white;
   font-size: 1.1rem;
   font-weight: 600;
@@ -81,5 +114,5 @@
 }
 
 .done-button:hover {
-  background-color: #4a4a6e; /* Darker on hover */
+  background-color: #4a4a6e;
 }
