@@ -3,7 +3,8 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import '../Styles/AdminDashboard.css';
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut, Bar } from "react-chartjs-2";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faHouse, faCreditCard, faSearch, faBell } from '@fortawesome/free-solid-svg-icons';

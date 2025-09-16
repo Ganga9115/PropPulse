@@ -60,32 +60,8 @@
   align-items: center;
 }
 
-.filter-select-with-dot {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.paid-dot {
-  background-color: #4CAF50;
-}
-
-.unpaid-dot {
-  background-color: #F44336;
-}
-
 .filter-select {
-  padding: 12px 12px 12px 25px;
+  padding: 12px 12px;
   border-radius: 8px;
   border: 1px solid #c9d6e5;
   background-color: #fff;
