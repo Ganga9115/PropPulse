@@ -10,15 +10,25 @@ const initialPayments = [
 const PaymentHistory = () => {
   const [payments, setPayments] = useState(initialPayments);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All');
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const filteredPayments = payments.filter(payment =>
-    payment.name.toLowerCase().includes(searchTerm) ||
-    payment.unit.toLowerCase().includes(searchTerm)
-  );
+  // Function to handle the change in the select dropdown
+  const handleStatusFilter = (event) => {
+    setStatusFilter(event.target.value);
+  };
+
+  const filteredPayments = payments.filter(payment => {
+    const matchesSearch = payment.name.toLowerCase().includes(searchTerm) ||
+      payment.unit.toLowerCase().includes(searchTerm);
+    
+    const matchesStatus = statusFilter === 'All' || payment.status === statusFilter;
+    
+    return matchesSearch && matchesStatus;
+  });
 
   const totalPaid = payments.reduce((acc, current) =>
     current.status === 'Paid' ? acc + current.amount : acc, 0
@@ -49,15 +59,16 @@ const PaymentHistory = () => {
           />
         </div>
         <div className="filter-dropdowns-container">
-          <select className="filter-select"><option>All</option></select>
-          <div className="filter-select-with-dot">
-            <span className="dot paid-dot"></span>
-            <select className="filter-select"><option>Paid</option></select>
-          </div>
-          <div className="filter-select-with-dot">
-            <span className="dot unpaid-dot"></span>
-            <select className="filter-select"><option>Unpaid</option></select>
-          </div>
+          {/* Use select dropdowns as shown in the image */}
+          <select 
+            className="filter-select"
+            value={statusFilter}
+            onChange={handleStatusFilter}
+          >
+            <option value="All">All</option>
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+          </select>
           <div className="date-input-container">
             <label>Due Date :</label>
             <input type="date" className="date-input" />

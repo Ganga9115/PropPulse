@@ -1,0 +1,248 @@
+.main-content {
+  background-color: #f0f4f8;
+  padding: 2rem 3rem;
+  min-height: 100vh;
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #e6eefc;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.details-title {
+  color: #0b1a3d;
+  font-size: 2.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-image img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #1a233b;
+  margin: 0;
+}
+
+.profile-id {
+  font-size: 1em;
+  color: #777;
+  margin: 0;
+}
+
+.details-card-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .details-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+.details-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.lease-card {
+  border: 1px solid #4CAF50;
+}
+
+.payment-card {
+  border: 1px solid #2196F3;
+}
+
+.contact-card {
+  border: 1px solid #0056b3;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-header h4, .details-card h4 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.status-badge {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.card-content {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.unit-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.unit-icon {
+  font-size: 1.8em;
+  color: #0b1a3d;
+}
+
+.unit-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.unit-name {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #1a233b;
+}
+
+.unit-floor {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.contract-link {
+  color: #2196F3;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.lease-info {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.lease-info p {
+  margin: 0.5rem 0;
+}
+
+.lease-info p span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Payment card specific styles */
+.payment-due {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #333;
+}
+
+.last-payment-date span {
+  font-weight: bold;
+  color: #333;
+}
+
+.payment-chart {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  height: 40px;
+  margin-top: 1rem;
+}
+
+.chart-bar {
+  width: 15px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+}
+
+.chart-bar.unpaid {
+  background-color: #e0e0e0;
+}
+
+.chart-bar.paid {
+  background-color: #28a745;
+  height: 100%;
+}
+
+/* contact card specific styles */
+.contact-name {
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-info .contact-icon {
+  font-size: 1.2em;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-accept {
+  background-color: #0b1a3d;
+}
+
+.btn-decline {
+  background-color: #dc3545;
+}
+
+.btn-schedule {
+  background-color: #6c757d;
+}
