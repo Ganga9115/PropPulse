@@ -18,8 +18,8 @@ import "./index.css";
 import SuccessfulPayment from './components/SuccessfulPayment';
 import UnitDetailsPage from './components/UnitDetailsPage';
 import Contact from "./components/Contact";  
+import AdminDashboard from "./components/AdminDashboard"; 
 import PaymentHistory from "./components/PaymentHistory";
-
 export default function App() {
   return (
     <Routes>
@@ -43,7 +43,11 @@ export default function App() {
       <Route path="/successful-payment" element={<div className="flex"><Sidebar /><SuccessfulPayment /></div>} />
       <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage /></div>} />
       <Route path="/contact" element={<div className="flex"><Sidebar /><Contact /></div>} /> 
+
+      <Route path="/admin-dashboard" element={<div className="flex"><AdminDashboard /></div>} />
+
       <Route path="/payment-history" element={<div className="flex"><Sidebar /><PaymentHistory /></div>} />
+
     </Routes>
   );
 }
