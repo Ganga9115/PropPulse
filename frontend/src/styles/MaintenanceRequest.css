@@ -1,3 +1,6 @@
+body {
+  background-color: #f9fafb;
+}
 .maintenance2-container {
   flex: 1;
   background: #f9fafb;
@@ -7,7 +10,7 @@
 
 .maintenance-layout {
   display: flex;             /* Sidebar + Main Content side by side */
-  min-height: 100vh;         /* Full screen height */
+  min-height: 100vh;     /* Full screen height */
   background: #f9fafb;
 }
 

@@ -5,7 +5,7 @@
 
 .contact-container {
   flex: 1;
-   padding: 9px 32px ;
+  padding: 9px 32px;
 }
 
 .contact-header {
@@ -17,14 +17,14 @@
 }
 
 .contact-header h1 {
- font-size: 35px;
+  font-size: 35px;
   font-weight: 700;
   color: #1e3a8a;
   margin-bottom: 4px;
 }
 
 .contact-header p {
-   color: #738fbc;
+  color: #738fbc;
   font-size: 20px;
 }
 
@@ -44,21 +44,28 @@
 
 .contact-info h3 {
   color: #1d2a5d;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 40px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.contact-info p {
+.contact-info .info-item {
   display: flex;
-  align-items: center;
-  margin: 10px 0;
+  flex-direction: column;   /* ✅ icon above text */
+  align-items: flex-start;
+  margin: 18px 0;
+  gap: 6px;
+}
+
+.contact-info .info-item p {
+  margin: 0;
   color: #333;
+  line-height: 1.6;
 }
 
 .contact-info .icon {
-  margin-right: 10px;
   color: #1d2a5d;
+  font-size: 20px;
 }
 
 .contact-form {
@@ -107,6 +114,7 @@
 .contact-form button:hover {
   background: #16204b;
 }
+
 .contact-banner {
   text-align: center;
   margin-bottom: 40px;
