@@ -15,7 +15,6 @@
 }
 
 
-
 .sidebar-header {
   display: flex;
   flex-direction: column;
@@ -61,3 +60,4 @@
   padding: 16px;
   border-top: 1px solid #e5e7eb;
 }
+

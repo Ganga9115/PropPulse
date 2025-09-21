@@ -1,5 +1,7 @@
 /* src/Styles/AdminDashboard.css */
-
+body{
+  background-color: #f7f9fc;
+}
 .admin-dashboard-layout {
   display: flex;
   height: 100vh;
@@ -96,7 +98,7 @@
 
 .card p {
   margin: 5px 0 0;
-  font-size: 1.5rem;
+  font-size: 2.0rem;
   font-weight: bold;
   color: #333;
 }
@@ -187,6 +189,7 @@
   padding: 10px 15px;
   border-radius: 8px;
 }
+
 
 .date-block span {
   font-size: 0.8rem;
