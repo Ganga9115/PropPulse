@@ -42,7 +42,7 @@ const Contact = () => {
 <div className="info-item">
   <FaMapMarkerAlt className="icon" style={{ color: "red" }} />
   <div className="info-text-container">
-    <p>No. 24, Green Tech Park, Anna Nagar,</p>
+    <p>No 24, Green Tech Park, Anna Nagar,</p>
     <p>Chennai – 600040</p>
   </div>
 </div>

@@ -20,7 +20,7 @@ const Sidebar = () => {
 
       <div className="sidebar-nav">
         <Link to="/tenant-directory" className="sidebar-link">
-          <FaHome className="sidebar-icon" /> My Lease/Rent
+          <FaHome className="sidebar-icon" />  Lease/Rent
         </Link>
         <Link to="/admin-maintenance" className="sidebar-link">
           <FaTools className="sidebar-icon" /> Maintenance

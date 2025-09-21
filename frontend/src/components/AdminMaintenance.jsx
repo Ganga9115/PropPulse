@@ -25,7 +25,7 @@ const AdminMaintenance = () => {
       issue: "HVAC (AC not cooling)",
       date: "13-Sep-2025",
       status: "In Progress",
-      details: "The AC unit in the back room is blowing warm air. The tenant reported this issue this morning and it's affecting their storage area.",
+      details: "The AC unit in the Back room is blowing warm air. The tenant reported this issue this morning and it's affecting their storage area.",
       image: "path/to/hvac-issue.png",
     },
     {

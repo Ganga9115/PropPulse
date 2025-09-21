@@ -50,7 +50,7 @@ const AdminDashboard = () => {
       {
         label: 'Maintenance Tickets',
         data: [12, 5, 10], // Based on your UI
-        backgroundColor: ['#e58b8f', '#ffc857', '#416597ff'],
+        backgroundColor: ['#d98b8fff', '#ffc857', '#416597ff'],
         borderRadius: 5,
         barPercentage: 0.6,
         categoryPercentage: 0.8,
