@@ -1,10 +1,5 @@
-.dashboard {
-  flex: 1;
-  background-color: #f9fafb; /* light gray */
-  padding: 5px 22px;
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+
+
 
 /* Header Section */
 .dashboard-header {
@@ -85,25 +80,20 @@
 /* Cards */
 .dashboard-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 20px;
-  margin-top: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* slightly bigger */
+  gap: 48px;
+  margin-top: 40px;
+  width: 100%;              /* ensure it spans fully */
+  max-width: 2000px;        /* control readability */
+  margin-left: auto;
+  margin-right: auto;       /* center grid */
 }
 
 .card {
-  background: #ffffff;
-  padding: 50px;
-  border-radius: 16px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  /* Use flexbox to center content */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centers items vertically */
-  align-items: center; /* Centers items horizontally */
+  padding: 30px; /* comfy, not cramped */
+  min-height: 220px; /* keeps height consistent */
 }
+
 
 .card:hover {
   transform: translateY(-5px);
