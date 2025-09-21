@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import { useEffect } from 'react';
-import login from "../assets/login.png"
+import login from "../assets/login.png";
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -11,26 +10,34 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-  }, []);
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsLoading(true); 
-  try {
-    const res = await axios.post('http://localhost:5000/login', {
-      email,
-      password,
-    });
-    localStorage.setItem('token', res.data.token);
-    setMessage(`Welcome, ${res.data.user.username}`);
-    navigate('/dashboard');
-  } catch (err) {
-    setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
-  } finally {
-    setIsLoading(false);
-  }
-};
+    e.preventDefault();
+    setIsLoading(true); 
+    try {
+      const res = await axios.post('http://localhost:5000/login', {
+        email,
+        password,
+      });
+
+      // Save token + user details in localStorage
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+
+      setMessage(`Welcome, ${res.data.user.username}`);
+
+      // 👇 Redirect based on role
+      if (res.data.user.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else {
+        navigate('/dashboard'); // tenant
+      }
+
+    } catch (err) {
+      setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen font-sans">
@@ -50,7 +57,9 @@ const LoginPage = () => {
               </svg>
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mt-2">Login Now</h2>
-            <p className="text-sm text-gray-500 text-center mt-1">Welcome back! Login to access our exclusive contents</p>
+            <p className="text-sm text-gray-500 text-center mt-1">
+              Welcome back! Login to access our exclusive contents
+            </p>
           </div>
           {message && <p className="text-red-500 text-center mb-3">{message}</p>}
           <form className="space-y-4" onSubmit={handleSubmit}>
