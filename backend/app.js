@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const sequelize = require('./db');
 const User = require('./models/User');
-
+const authMiddleware = require('./middleware/auth');
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -43,6 +43,16 @@ app.post('/login', async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user.id, username: user.username, email } });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Protected route (Tenant Dashboard)
+app.get('/dashboard', authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id, { attributes: ['id', 'username', 'email'] });
+        res.json({ message: 'Welcome to the dashboard!', user });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

@@ -15,22 +15,22 @@ const LoginPage = () => {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true); 
-    try {
-      const res = await axios.post('http://localhost:5000/login', {
-        email,
-        password,
-      });
-      localStorage.setItem('token', res.data.token);
-      setMessage(`Welcome, ${res.data.user.username}`);
-      navigate('/select-unit');
-    } catch (err) {
-      setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  e.preventDefault();
+  setIsLoading(true); 
+  try {
+    const res = await axios.post('http://localhost:5000/login', {
+      email,
+      password,
+    });
+    localStorage.setItem('token', res.data.token);
+    setMessage(`Welcome, ${res.data.user.username}`);
+    navigate('/dashboard');
+  } catch (err) {
+    setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen font-sans">

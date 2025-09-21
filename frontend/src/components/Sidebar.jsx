@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaTools, FaMoneyBillWave, FaFileContract, FaPhone, FaCog, FaSignOutAlt } from "react-icons/fa";
 import "../styles/Sidebar.css";
-import logo from "../assets/logo.png"; // 👈 put your building logo inside src/assets
+import logo from "../assets/logo.png";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear token
+    navigate("/"); // Redirect to landing page (change to "/login" if you want)
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -33,9 +40,10 @@ const Sidebar = () => {
         <Link to="/settings" className="sidebar-link">
           <FaCog className="sidebar-icon" /> Settings
         </Link>
-        <Link to="/logout" className="sidebar-link" style={{ color: "red" }}>
+        {/* Logout button */}
+        <button onClick={handleLogout} className="sidebar-link" style={{ color: "red", border: "none", background: "none", cursor: "pointer" }}>
           <FaSignOutAlt className="sidebar-icon" /> Logout
-        </Link>
+        </button>
       </div>
     </div>
   );
