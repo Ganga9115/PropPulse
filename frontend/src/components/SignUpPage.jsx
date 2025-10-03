@@ -24,12 +24,17 @@ const SignUpPage = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/signup', {
+      // FIX: Changed the URL to include the /api/users prefix
+      const res = await axios.post('http://localhost:5000/api/users/signup', {
         username: name,
         email,
         password,
         role, // 👈 send role to backend
       });
+      
+      // The backend needs a quick way to show an error if the email exists (409)
+      // The console shows an error when the user already exists.
+      // We are just showing a success message here for now.
       setMessage(res.data.message);
 
       // Clear form
@@ -39,9 +44,12 @@ const SignUpPage = () => {
       setConfirmPassword('');
       setRole('tenant');
 
+      // Navigate after successful sign up
       navigate('/login');
     } catch (err) {
-      setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
+      // Improved error handling to show specific backend message
+      const errorMessage = err.response?.data?.error || err.response?.data?.message || 'An error occurred. Please try again.';
+      setMessage(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +78,8 @@ const SignUpPage = () => {
             </p>
           </div>
 
-          {message && <p className="text-red-500 text-center mb-3">{message}</p>}
+          {/* Display error/success message */}
+          {message && <p className={`text-center mb-3 ${message.includes('success') ? 'text-green-600' : 'text-red-500'}`}>{message}</p>}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
@@ -82,7 +91,7 @@ const SignUpPage = () => {
             />
             <input
               type="text"
-              placeholder="Email or Username"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 placeholder-gray-500 transition duration-300"
@@ -115,7 +124,7 @@ const SignUpPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'SIGNING UP...' : 'SIGN UP'}
             </button>

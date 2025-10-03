@@ -14,13 +14,16 @@ const LoginPage = () => {
     e.preventDefault();
     setIsLoading(true); 
     try {
-      const res = await axios.post('http://localhost:5000/login', {
+      // FIX: Changed the URL to include the /api/users prefix
+      const res = await axios.post('http://localhost:5000/api/users/login', {
         email,
         password,
       });
 
-      // Save token + user details in localStorage
-      localStorage.setItem('token', res.data.token);
+      // NOTE: The backend logic for /login does NOT currently return a 'token', 
+      // but it does return the 'user' object. We'll proceed with this for now.
+      
+      // Save user details in localStorage
       localStorage.setItem('user', JSON.stringify(res.data.user));
 
       setMessage(`Welcome, ${res.data.user.username}`);
@@ -33,7 +36,9 @@ const LoginPage = () => {
       }
 
     } catch (err) {
-      setMessage(err.response?.data?.message || 'An error occurred. Please try again.');
+      // Improved error handling to show specific backend message
+      const errorMessage = err.response?.data?.error || err.response?.data?.message || 'An error occurred. Please try again.';
+      setMessage(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +66,8 @@ const LoginPage = () => {
               Welcome back! Login to access our exclusive contents
             </p>
           </div>
-          {message && <p className="text-red-500 text-center mb-3">{message}</p>}
+          {/* Use dynamic class for success/error message */}
+          {message && <p className={`text-center mb-3 ${message.includes('Welcome') ? 'text-green-600' : 'text-red-500'}`}>{message}</p>}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -80,7 +86,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={isLoading} 
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'LOADING...' : 'LOGIN'}
             </button>
