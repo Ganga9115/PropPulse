@@ -1,185 +1,175 @@
-import React, { useState } from "react";
+// frontend/AdminMaintenance.jsx
+
+import React, { useState, useEffect, useCallback } from "react";
+import axios from 'axios';
 import "../styles/AdminMaintenance.css";
 import SidebarAdmin from "./SidebarAdmin";
 import MaintenanceDetailsModal from "./MaintenanceDetailsModal";
-import SuccessModal from "./SuccessModal"; // New component for the success screen
+import SuccessModal from "./SuccessModal"; 
+
+axios.defaults.baseURL = 'http://localhost:5000'; 
 
 const AdminMaintenance = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRequest, setSelectedRequest] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); // New state for success message
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedRequest, setSelectedRequest] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null); 
+    const [requests, setRequests] = useState([]); // State to hold fetched requests
+    const [loading, setLoading] = useState(true);
 
-  const requests = [
-    {
-      id: "MTN-2001",
-      tenant: "NA Fashion (Unit F-12)",
-      issue: "Electrical (Power socket issue)",
-      date: "12-Sep-2025",
-      status: "Open",
-      details: "The power socket in the main retail area is not working. The tenant has tried resetting the breaker with no success.",
-      image: "path/to/electrical-issue.png",
-    },
-    {
-      id: "MTN-1012",
-      tenant: "Trends Footwear",
-      issue: "HVAC (AC not cooling)",
-      date: "13-Sep-2025",
-      status: "In Progress",
-      details: "The AC unit in the Back room is blowing warm air. The tenant reported this issue this morning and it's affecting their storage area.",
-      image: "path/to/hvac-issue.png",
-    },
-    {
-      id: "MTN-2007",
-      tenant: "Aroma Coffee Shop (Unit D-10)",
-      issue: "Plumbing (Restroom tap broken)",
-      date: "10-Sep-2025",
-      status: "In Progress",
-      details: "The tap in the customer restroom is leaking continuously and is completely broken.",
-      image: "path/to/plumbing-issue.png",
-    },
-    {
-      id: "MTN-2004",
-      tenant: "Dynamics Mobiles",
-      issue: "General (Broken glass door)",
-      date: "9-Sep-2025",
-      status: "Closed",
-      details: "The glass door at the entrance was shattered due to an accident.",
-      image: "path/to/glass-issue.png",
-    },
-  ];
+    // Function to fetch data from the backend
+    const fetchRequests = useCallback(async () => {
+        try {
+            setLoading(true);
+            // Calls the Admin Fetch Route, which now includes tenant data
+            const response = await axios.get('/api/maintenance/admin');
+            setRequests(response.data);
+        } catch (error) {
+            console.error('Error fetching maintenance data:', error);
+            // This alert might be the source of the "failed to load" message if the request fails
+            alert('Failed to load maintenance requests. Check console for details.');
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
-  const handleOpenModal = (request) => {
-    setSelectedRequest(request);
-    setIsModalOpen(true);
-  };
+    useEffect(() => {
+        fetchRequests();
+    }, [fetchRequests]);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedRequest(null);
-  };
+    const handleOpenModal = (request) => {
+        setSelectedRequest(request);
+        setIsModalOpen(true);
+    };
 
-  const handleActionSuccess = (message) => {
-    handleCloseModal(); // Close the details modal
-    const currentTime = new Date();
-    const formattedDate = currentTime.toLocaleDateString();
-    const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setSuccessMessage({
-      text: message,
-      date: formattedDate,
-      time: formattedTime,
-    });
-  };
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedRequest(null);
+    };
 
-  const handleCloseSuccessModal = () => {
-    setSuccessMessage(null);
-  };
+    const handleActionSuccess = (message) => {
+        handleCloseModal(); // Close the details modal
+        fetchRequests(); // RE-FETCH DATA to update the table instantly
+        const currentTime = new Date();
+        setSuccessMessage({
+            text: message,
+            date: currentTime.toLocaleDateString(),
+            time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        });
+    };
 
-  const getStatusButton = (status, request) => {
-    switch (status) {
-      case "Open":
-        return (
-          <button className="btn danger" onClick={() => handleOpenModal(request)}>
-            <span className="dot red"></span> Accept / Assign Vendor
-          </button>
-        );
-      case "In Progress":
-        return (
-          <button className="btn warning" onClick={() => handleOpenModal(request)}>
-            <span className="dot orange"></span> Assign Vendor / Close
-          </button>
-        );
-      case "Closed":
-        return (
-          <button className="btn success" onClick={() => handleOpenModal(request)}>
-            <span className="dot green"></span> View Details
-          </button>
-        );
-      default:
-        return null;
-    }
-  };
+    const handleCloseSuccessModal = () => {
+        setSuccessMessage(null);
+    };
 
-  return (
-    <div className="maintenance-page">
-      <SidebarAdmin />
+    // This function determines the button and text based on the request status
+    const getStatusButton = (status, request) => {
+        switch (status) {
+            case "Open":
+                return (
+                    <button className="btn danger" onClick={() => handleOpenModal(request)}>
+                        <span className="dot red"></span> Accept / Assign Vendor
+                    </button>
+                );
+            case "Assigned": 
+            case "In Progress":
+                return (
+                    <button className="btn warning" onClick={() => handleOpenModal(request)}>
+                        <span className="dot orange"></span> Assign Vendor / Close
+                    </button>
+                );
+            case "Completed": 
+            case "Closed":
+                return (
+                    <button className="btn success" onClick={() => handleOpenModal(request)}>
+                        <span className="dot green"></span> View Details
+                    </button>
+                );
+            default:
+                return null;
+        }
+    };
+    
+    if (loading) {
+        return <div className="maintenance-page"><SidebarAdmin /><div className="main-content">Loading Requests...</div></div>;
+    }
 
-      <div className="main-content">
-        {/* Header with Image */}
-        <div className="header-container">
-          <div className="text-content">
-            
-            <div className="main-title">
-              <h2>
-                Stay in control of every maintenance request – 
-                <span className="highlight"> track, assign, and resolve</span> with ease
-              </h2>
-            </div>
-          </div>
-       
-        </div>
+    return (
+        <div className="maintenance-page">
+            <SidebarAdmin />
 
-        {/* Filters and Search Bar */}
-        <div className="filter-row">
-          <div className="status-filter">
-            <div className="status-dropdown">Status</div>
-            <div className="status-legend-popup">
-              <div className="legend-item"><span className="dot red"></span> Open</div>
-              <div className="legend-item"><span className="dot orange"></span> In Progress</div>
-              <div className="legend-item"><span className="dot green"></span> Closed</div>
-            </div>
-          </div>
-          <div className="search-box">
-            <input
-              type="text"
-              placeholder="Search requests by ID, status, or issue"
-            />
-          </div>
-        </div>
+            <div className="main-content">
+                {/* Header Content */}
+                <div className="header-container">
+                    <div className="text-content">
+                        <div className="main-title">
+                            <h2>
+                                Stay in control of every maintenance request – 
+                                <span className="highlight"> track, assign, and resolve</span> with ease
+                            </h2>
+                        </div>
+                    </div>
+                </div>
 
-        {/* Table */}
-        <table className="maintenance-table">
-          <thead>
-            <tr>
-              <th>Tenant ID</th>
-              <th>Tenant (Shop & Unit No)</th>
-              <th>Issue Category</th>
-              <th>Raised Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req, index) => (
-              <tr key={index}>
-                <td>{req.id}</td>
-                <td>{req.tenant}</td>
-                <td>{req.issue}</td>
-                <td>{req.date}</td>
-                <td>{getStatusButton(req.status, req)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                {/* Filters and Search Bar */}
+                <div className="filter-row">
+                    {/* ... (Filters/Search UI) ... */}
+                </div>
 
-      {isModalOpen && selectedRequest && (
-        <MaintenanceDetailsModal
-          request={selectedRequest}
-          onClose={handleCloseModal}
-          onAccept={() => handleActionSuccess("Request Accepted!")}
-          onAssign={() => handleActionSuccess("Vendor Assigned!")}
-        />
-      )}
+                {/* Table */}
+                <table className="maintenance-table">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Tenant</th>
+                            <th>Issue Category</th>
+                            <th>Raised Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {requests.length > 0 ? (
+                            requests.map((req) => (
+                                <tr key={req.id}>
+                                    <td>{req.maintenanceId || `MTN-${req.id}`}</td>
+                                    {/* FIX: Use Optional Chaining (?.) to safely access nested username */}
+                                    <td>
+                                        {req.tenant?.username || `TNT-${req.userId}`} 
+                                    </td>
+                                    <td>
+                                        {req.category} ({req.title || 'N/A'})
+                                    </td>
+                                    <td>{new Date(req.createdAt).toLocaleDateString()}</td>
+                                    <td>{req.status}</td>
+                                    <td>{getStatusButton(req.status, req)}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr><td colSpan="6" style={{textAlign: 'center'}}>No maintenance requests currently available.</td></tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
 
-      {successMessage && (
-        <SuccessModal
-          message={successMessage.text}
-          date={successMessage.date}
-          time={successMessage.time}
-          onClose={handleCloseSuccessModal}
-        />
-      )}
-    </div>
-  );
+            {isModalOpen && selectedRequest && (
+                <MaintenanceDetailsModal
+                    request={selectedRequest}
+                    onClose={handleCloseModal}
+                    // We pass the action success handler here
+                    onActionSuccess={handleActionSuccess} 
+                />
+            )}
+
+            {successMessage && (
+                <SuccessModal
+                    message={successMessage.text}
+                    date={successMessage.date}
+                    time={successMessage.time}
+                    onClose={handleCloseSuccessModal}
+                />
+            )}
+        </div>
+    );
 };
 
 export default AdminMaintenance;

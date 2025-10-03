@@ -37,8 +37,8 @@ export default function App() {
 
       {/* Routes with Tenant Sidebar */}
       <Route path="/dashboard" element={<div className="flex"><Sidebar /><TenantDashboard /></div>} />
-      <Route path="/maintenance" element={<div className="flex"><Sidebar /><MaintenanceView /></div>} />
-      <Route path="/maintenance/new" element={<div className="flex"><Sidebar /><MaintenanceRequest /></div>} />
+      <Route path="/maintenance" element={<div className="flex"><MaintenanceView /></div>} />
+      <Route path="/maintenance/new" element={<div className="flex"><MaintenanceRequest /></div>} />
       <Route path="/rent" element={<div className="flex"><Sidebar /><Rent /></div>} /> 
       <Route path="/payment" element={<div className="flex"><Sidebar /><Payment /></div>} />
       <Route path="/select-unit" element={<div className="flex"><Sidebar /><SelectUnitPage /></div>} />

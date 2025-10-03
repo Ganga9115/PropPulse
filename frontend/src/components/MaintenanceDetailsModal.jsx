@@ -1,68 +1,141 @@
-import React from "react";
+// frontend/MaintenanceDetailsModal.jsx
+
+import React, { useState } from "react";
+import axios from 'axios'; 
 import "../styles/MaintenanceDetailsModal.css";
 
-// Import issue images from your assets folder
-import electricalIssueImage from "../assets/electrical-issue.png";
-import hvacIssueImage from "../assets/hvac-issue.png";
-import plumbingIssueImage from "../assets/plumbing-issue.png";
-import glassIssueImage from "../assets/glass-issue.png";
+axios.defaults.baseURL = 'http://localhost:5000'; 
 
-// Add onAccept and onAssign props
-const MaintenanceDetailsModal = ({ request, onClose, onAccept, onAssign }) => {
-  if (!request) return null;
+const MaintenanceDetailsModal = ({ request, onClose, onActionSuccess }) => {
+    if (!request) return null;
 
-  const getIssueImage = (issue) => {
-    switch (issue) {
-      case "Electrical (Power socket issue)":
-        return electricalIssueImage;
-      case "HVAC (AC not cooling)":
-        return hvacIssueImage;
-      case "Plumbing (Restroom tap broken)":
-        return plumbingIssueImage;
-      case "General (Broken glass door)":
-        return glassIssueImage;
-      default:
-        return null;
-    }
-  };
+    // Use the actual model column name for reading
+    const [vendorName, setVendorName] = useState(request.assignedTo || ""); 
+    
+    // Format the date correctly for the input field if it exists
+    const initialVisitDate = request.expectedVisit 
+      ? new Date(request.expectedVisit).toISOString().substring(0, 16) 
+      : "";
+    const [expectedVisit, setExpectedVisit] = useState(initialVisitDate);
 
-  const currentImage = getIssueImage(request.issue);
 
-  return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>&times;</button>
-        <div className="modal-header">
-          <h3>Request Details: {request.id}</h3>
-        </div>
-        <div className="modal-body">
-          <p><strong>Tenant:</strong> {request.tenant}</p>
-          <p><strong>Issue Category:</strong> {request.issue}</p>
-          <p><strong>Raised Date:</strong> {request.date}</p>
-          <p><strong>Status:</strong> {request.status}</p>
-          
-          <div className="issue-details">
-            <h4>Issue Description:</h4>
-            <p>{request.details}</p>
+    // --- ASSIGN VENDOR HANDLER ---
+    const handleAssignVendor = async () => {
+        if (!vendorName || !expectedVisit) {
+            alert("Please enter both Vendor Name and Expected Visit Date/Time.");
+            return;
+        }
+
+        try {
+            await axios.put(`/api/maintenance/${request.id}`, {
+                status: "Assigned", 
+                assignedVendor: vendorName, // Sent to backend to map to 'assignedTo'
+                expectedVisit: expectedVisit,
+            });
+
+            onActionSuccess(`Request MTN-${request.id} assigned to ${vendorName}!`);
+
+        } catch (error) {
+            console.error('Assignment failed:', error.response?.data || error.message);
+            alert(`Failed to assign vendor: ${error.response?.data?.error || 'Server error'}`);
+        }
+    };
+    
+    // --- ACCEPT REQUEST HANDLER (FIXED) ---
+    const handleAcceptRequest = async () => {
+        try {
+            // ONLY change status to 'In Progress'. The backend should accept this without vendor details.
+            await axios.put(`/api/maintenance/${request.id}`, {
+                status: "In Progress", 
+            });
+            onActionSuccess(`Request MTN-${request.id} accepted. Status set to In Progress.`);
+        } catch (error) {
+            console.error('Acceptance failed:', error.response?.data || error.message);
+            alert(`Failed to accept request: ${error.response?.data?.error || 'Server error'}`);
+        }
+    };
+    // --------------------------------
+
+    // Function to generate the full image URL (unchanged)
+    const getFullImageUrl = (photoURL) => {
+      if (!photoURL) return null;
+      // Model uses 'photoUrl' (lowercase L)
+      return `http://localhost:5000${photoURL}`; 
+    };
+
+    return (
+      <div className="modal-backdrop" onClick={onClose}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <button className="close-btn" onClick={onClose}>&times;</button>
+          <div className="modal-header">
+            <h3>Request Details: MTN-{request.id}</h3>
           </div>
+          <div className="modal-body">
+            <p><strong>Tenant ID:</strong> TNT-{request.userId}</p> 
+            <p><strong>Issue Category:</strong> {request.category}</p>
+            <p><strong>Raised Date:</strong> {new Date(request.createdAt).toLocaleDateString()}</p>
+            <p><strong>Current Status:</strong> {request.status}</p>
+            
+            <div className="issue-details">
+              <h4>Issue Description:</h4>
+              {/* Use 'details' from the model */}
+              <p>{request.details}</p> 
+            </div>
 
-          <div className="issue-image-container">
-            <h4>Maintenance Image:</h4>
-            {currentImage ? (
-              <img src={currentImage} alt="Maintenance issue" className="issue-image" />
-            ) : (
-              <p>No image available for this issue.</p>
+            <div className="issue-image-container">
+              <h4>Maintenance Image:</h4>
+              {/* Use 'photoUrl' from the model */}
+              {request.photoUrl ? ( 
+                <img 
+                  src={getFullImageUrl(request.photoUrl)} 
+                  alt="Maintenance issue photo" 
+                  className="issue-image" 
+                />
+              ) : (
+                <p>No image uploaded for this issue.</p>
+              )}
+            </div>
+
+            {/* Assignment form visible for Open, Assigned, or In Progress */}
+            {['Open', 'Assigned', 'In Progress'].includes(request.status) && (
+              <div className="assignment-form">
+                <h4>Assign Vendor:</h4>
+                <input
+                  type="text"
+                  placeholder="Vendor Name (e.g., ABC Services)"
+                  value={vendorName}
+                  onChange={(e) => setVendorName(e.target.value)}
+                />
+                <br />
+                <br/>
+                <input
+                  type="datetime-local"
+                  placeholder="Expected Visit Date/Time"
+                  value={expectedVisit}
+                  onChange={(e) => setExpectedVisit(e.target.value)}
+                />
+              </div>
             )}
-          </div>
 
-          <div className="modal-actions">
-            <button className="btn accept-btn" onClick={onAccept}>Accept Request</button>
-            <button className="btn assign-btn" onClick={onAssign}>Assign Vendor</button>
+
+            <div className="modal-actions">
+              {request.status === 'Open' && (
+                <>
+                  <button className="btn accept-btn" onClick={handleAcceptRequest}>Accept Request</button>
+                  <button className="btn assign-btn" onClick={handleAssignVendor}>Assign Vendor</button>
+                </>
+              )}
+              {request.status === 'Assigned' && (
+                  <button className="btn assign-btn" onClick={handleAssignVendor}>Update Assignment</button>
+              )}
+              {request.status === 'In Progress' && (
+                <button className="btn success">Mark as Completed</button> 
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default MaintenanceDetailsModal;

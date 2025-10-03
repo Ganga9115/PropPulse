@@ -1,6 +1,8 @@
 body {
   background-color: #f9fafb;
 }
+
+/* Layout */
 .maintenance2-container {
   flex: 1;
   background: #f9fafb;
@@ -9,24 +11,24 @@ body {
 }
 
 .maintenance-layout {
-  display: flex;             /* Sidebar + Main Content side by side */
-  min-height: 100vh;     /* Full screen height */
+  display: flex;
+  min-height: 100vh;
   background: #f9fafb;
 }
 
 .sidebar {
-  width: 250px;              /* Sidebar fixed width */
+  width: 250px;
   background: #fff;
   border-right: 1px solid #ddd;
   padding: 20px 10px;
 }
 
 .maintenance2-container {
-  flex: 1;                   /* Take remaining space */
+  flex: 1;
   padding: 20px 40px;
   background: #f9fafb;
   font-family: "Segoe UI", sans-serif;
-  overflow-y: auto;          /* Scroll if content overflows */
+  overflow-y: auto;
 }
 
 /* Blue header */
@@ -61,6 +63,7 @@ body {
   margin-bottom: 16px;
 }
 
+/* Action buttons */
 .maintenance-actions {
   display: flex;
   gap: 12px;
@@ -98,17 +101,18 @@ body {
   background: #e0a800;
 }
 
-/* Form */
+/* Form Layout */
 .maintenance-form {
   display: flex;
-  justify-content: space-between;
-  gap: 30px;
+  gap: 40px;
   margin-bottom: 20px;
+  align-items: flex-start;
 }
 
 .form-left,
 .form-right {
   flex: 1;
+  max-width: 48%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -151,8 +155,8 @@ textarea {
   justify-content: center;
   border: 2px dashed #ccc;
   border-radius: 10px;
-  padding: 20px;
-  height: 120px;
+  padding: 15px;
+  height: 100px;
   text-align: center;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
@@ -176,18 +180,20 @@ textarea {
   text-decoration: underline;
 }
 
-/* Footer */
-.form-footer {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.file-name {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #444;
 }
 
-.terms {
-  font-size: 14px;
-  color: #444;
-  line-height: 1.4;
+/* Footer section */
+.form-footer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 }
 
 .submit-btn {
@@ -195,12 +201,13 @@ textarea {
   color: #fff;
   border: none;
   border-radius: 6px;
-  padding: 12px;
-  font-size: 16px;
+  padding: 12px 20px;
+  font-size: 15px;
   cursor: pointer;
-  width: 120px;
-  align-self: flex-start;
+  min-width: 140px;
+  height: 44px;
   transition: background 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;
 }
 
 .submit-btn:hover {
@@ -208,9 +215,32 @@ textarea {
   transform: translateY(-2px);
 }
 
+/* Terms always last */
+.terms {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+  margin-top: 12px;
+  max-width: 600px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .maintenance-form {
     flex-direction: column;
+  }
+
+  .form-left,
+  .form-right {
+    max-width: 100%;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn {
+    align-self: flex-start;
   }
 }
