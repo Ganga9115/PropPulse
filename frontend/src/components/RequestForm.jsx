@@ -5,10 +5,32 @@ import '../styles/RequestForm.css';
 const RequestForm = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Directly go to the Request Submitted page
-    navigate('/request-submitted');
+
+    const payload = {
+      tenantName: e.target.tenantName.value,
+      tenantId: e.target.tenantId.value,
+      email: e.target.email.value,
+      contactNo: e.target.contactNo.value,
+      preferredDate: e.target.preferredDate.value,
+      preferredTime: e.target.preferredTime.value,
+      shopName: e.target.shopName.value || 'N/A',
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/tenants', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error('Failed to submit request');
+
+      navigate('/request-submitted');
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
@@ -26,27 +48,31 @@ const RequestForm = () => {
         <div className="form-grid">
           <div className="form-group">
             <label className="form-label" htmlFor="tenantName">Tenant Name</label>
-            <input className="form-input" type="text" id="tenantName" placeholder="Tenant Name" />
+            <input className="form-input" type="text" id="tenantName" name="tenantName" placeholder="Tenant Name" required />
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="tenantId">Tenant ID</label>
-            <input className="form-input" type="text" id="tenantId" placeholder="Tenant ID" />
+            <input className="form-input" type="text" id="tenantId" name="tenantId" placeholder="Tenant ID" required />
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="email">Email</label>
-            <input className="form-input" type="email" id="email" placeholder="Email" />
+            <input className="form-input" type="email" id="email" name="email" placeholder="Email" required />
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="contactNo">Contact No</label>
-            <input className="form-input" type="tel" id="contactNo" placeholder="Contact No" />
+            <input className="form-input" type="tel" id="contactNo" name="contactNo" placeholder="Contact No" required />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="shopName">Shop Name</label>
+            <input className="form-input" type="text" id="shopName" name="shopName" placeholder="Shop Name" required />
           </div>
         </div>
 
         <div className="form-schedule-section">
           <h4 className="form-schedule-heading">Preferred Schedule</h4>
           <div className="form-schedule-inputs">
-            <input className="form-input schedule-input" type="date" />
-            <input className="form-input schedule-input" type="time" />
+            <input className="form-input schedule-input" type="date" name="preferredDate" required />
+            <input className="form-input schedule-input" type="time" name="preferredTime" required />
           </div>
         </div>
 
