@@ -8,32 +8,23 @@ require('dotenv').config();
 
 const { connectDB } = require('./db');
 const userRoutes = require('./routes/userRoutes');
-const maintenanceRoutes = require('./routes/maintenanceRoutes'); // NEW: Import Maintenance Routes
+const maintenanceRoutes = require('./routes/maintenanceRoutes');
+const tenantRoutes = require('./routes/tenantRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Allow cross-origin requests from your frontend
-app.use(bodyParser.json()); // To parse application/json
-app.use(bodyParser.urlencoded({ extended: true })); // To parse application/x-www-form-urlencoded
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Connect to Database and Sync Models
 connectDB();
 
-// Root route
-app.get('/', (req, res) => {
-    res.send('PropPulse Backend API is running!');
-});
+app.get('/', (req, res) => res.send('PropPulse Backend API is running!'));
 
-// API Routes
 app.use('/api/users', userRoutes);
-app.use('/api/maintenance', maintenanceRoutes); // NEW: Link Maintenance Routes
+app.use('/api/maintenance', maintenanceRoutes);
+app.use('/api/tenants', tenantRoutes);
 
-// Start Server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
-module.exports = app;
+app.listen(port, () => console.log(`✅ Server running on port ${port}`));
