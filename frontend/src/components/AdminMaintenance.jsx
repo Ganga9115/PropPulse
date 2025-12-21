@@ -1,4 +1,4 @@
-// frontend/AdminMaintenance.jsx
+// frontend/AdminMaintenance.jsx (FINAL VERIFIED CODE)
 
 import React, { useState, useEffect, useCallback } from "react";
 import axios from 'axios';
@@ -13,7 +13,7 @@ const AdminMaintenance = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null); 
-    const [requests, setRequests] = useState([]); // State to hold fetched requests
+    const [requests, setRequests] = useState([]); 
     const [loading, setLoading] = useState(true);
 
     // Function to fetch data from the backend
@@ -25,7 +25,6 @@ const AdminMaintenance = () => {
             setRequests(response.data);
         } catch (error) {
             console.error('Error fetching maintenance data:', error);
-            // This alert might be the source of the "failed to load" message if the request fails
             alert('Failed to load maintenance requests. Check console for details.');
         } finally {
             setLoading(false);
@@ -70,11 +69,16 @@ const AdminMaintenance = () => {
                         <span className="dot red"></span> Accept / Assign Vendor
                     </button>
                 );
-            case "Assigned": 
-            case "In Progress":
+            case "Assigned": // Refined button text
                 return (
                     <button className="btn warning" onClick={() => handleOpenModal(request)}>
-                        <span className="dot orange"></span> Assign Vendor / Close
+                        <span className="dot orange"></span> Update Vendor / Progress
+                    </button>
+                );
+            case "In Progress": // Refined button text
+                return (
+                    <button className="btn warning" onClick={() => handleOpenModal(request)}>
+                        <span className="dot orange"></span> Complete / View Details
                     </button>
                 );
             case "Completed": 
@@ -131,7 +135,9 @@ const AdminMaintenance = () => {
                         {requests.length > 0 ? (
                             requests.map((req) => (
                                 <tr key={req.id}>
-                                    <td>{req.maintenanceId || `MTN-${req.id}`}</td>
+                                    {/* CLEANUP: Use only the primary key 'id' */}
+                                    <td>MTN-{req.id}</td>
+                                    
                                     {/* FIX: Use Optional Chaining (?.) to safely access nested username */}
                                     <td>
                                         {req.tenant?.username || `TNT-${req.userId}`} 

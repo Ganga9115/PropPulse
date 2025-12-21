@@ -1,8 +1,6 @@
 // backend/models/User.js
-// This model uses the functional approach to avoid circular dependencies.
 
 module.exports = (sequelize, DataTypes) => {
-    // DataTypes is now passed as the second argument and can be used directly.
     const User = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
@@ -33,8 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true,
     });
 
-    // We can define associations here if needed, accessing other models via sequelize.models
-    // Example:
+    // The association logic is correctly centralized in db.js, so this can be empty or omitted.
     // User.associate = function(models) {
     //     User.hasMany(models.Maintenance, { foreignKey: 'userId', as: 'maintenanceRequests' });
     // };

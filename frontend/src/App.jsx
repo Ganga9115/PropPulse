@@ -1,4 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+// App.jsx (Reverted and Cleaned)
+
+import { Routes, Route } from "react-router-dom"; // Removed 'Navigate' and 'ProtectedRoute'
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
@@ -25,20 +27,22 @@ import TenantDirectory from "./components/TenantDirectory";
 import TenantDetails from "./components/TenantDetails";
 import AdminMaintenance from "./components/AdminMaintenance"; 
 
+// NOTE: Ensure ProtectedRoute.jsx is deleted or removed from imports.
+
 export default function App() {
   return (
     <Routes>
-      {/* Public Routes */}
+      {/* Public Routes (Accessible by all) */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/mall-maps" element={<InteractiveMallMap />} />
       <Route path="/deals-offers" element={<DealsOffers />} />
 
-      {/* Routes with Tenant Sidebar */}
+      {/* Tenant Routes with Sidebar (Now Public Again) */}
       <Route path="/dashboard" element={<div className="flex"><Sidebar /><TenantDashboard /></div>} />
-      <Route path="/maintenance" element={<div className="flex"><MaintenanceView /></div>} />
-      <Route path="/maintenance/new" element={<div className="flex"><MaintenanceRequest /></div>} />
+      <Route path="/maintenance" element={<div className="flex"><MaintenanceView /></div>} /> 
+      <Route path="/maintenance/new" element={<div className="flex"><MaintenanceRequest /></div>} /> 
       <Route path="/rent" element={<div className="flex"><Sidebar /><Rent /></div>} /> 
       <Route path="/payment" element={<div className="flex"><Sidebar /><Payment /></div>} />
       <Route path="/select-unit" element={<div className="flex"><Sidebar /><SelectUnitPage /></div>} />
@@ -49,8 +53,9 @@ export default function App() {
       <Route path="/unit-details" element={<div className="flex"><Sidebar /><UnitDetailsPage /></div>} />
       <Route path="/contact" element={<div className="flex"><Sidebar /><Contact /></div>} /> 
 
-      {/* Admin Routes with Admin Sidebar */}
-      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      {/* Admin Routes with Sidebar (Now Public Again) */}
+      {/* Ensure the Admin Dashboard and Maintenance routes now render their sidebar manually */}
+      <Route path="/admin-dashboard" element={<div className="flex"><AdminDashboard /></div>} /> 
       <Route path="/admin-maintenance" element={<div className="flex"><AdminMaintenance /></div>} /> 
       <Route path="/payment-history" element={<div className="flex"><SidebarAdmin /><PaymentHistory /></div>} />
       <Route path="/tenant-directory" element={<div className="flex"><SidebarAdmin /><TenantDirectory /></div>} />

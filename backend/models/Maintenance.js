@@ -1,20 +1,21 @@
 // backend/models/Maintenance.js
-
-// We no longer import sequelize here. We will export a function 
-// that accepts the sequelize instance and DataTypes when called.
+// Adopt the (sequelize, DataTypes) signature for consistency.
 
 module.exports = (sequelize, DataTypes) => {
     const Maintenance = sequelize.define('Maintenance', {
-        maintenanceId: {
-            type: DataTypes.STRING,
+        id: { // Change to 'id' for consistency with TenantRequest model
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
             allowNull: false,
-            unique: true,
-            // Function to generate a sequential ID based on the current date or count
-            defaultValue: () => `MTN-${Math.floor(Math.random() * 10000)}`,
         },
+        // Remove the separate 'maintenanceId' field if 'id' will be the primary key.
+        // If you still need a custom string ID, keep it, but use 'id' as primary key.
         userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            // Associations should be set up in a separate db/index.js file,
+            // but for now, we leave the reference:
             references: {
                 model: 'Users', 
                 key: 'id',
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         details: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT, // Using 'details' as in your current code
             allowNull: false,
         },
         category: {
@@ -49,12 +50,14 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 'Open',
             allowNull: false,
         },
-        assignedTo: {
+        assignedTo: { // Using 'assignedTo' as in your current code
             type: DataTypes.STRING,
             allowNull: true,
         },
     }, {
         tableName: 'MaintenanceRequests',
+        // Add timestamps to match your teammate's default behavior
+        timestamps: true, 
     });
 
     return Maintenance;
