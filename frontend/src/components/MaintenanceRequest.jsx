@@ -1,4 +1,4 @@
-// frontend/MaintenanceRequest.jsx (No significant changes from previous update)
+// frontend/MaintenanceRequest.jsx (FINAL CORRECTED VERSION)
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,8 +33,14 @@ const Maintenance2 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Basic validation
+    if (!formData.agree) {
+        alert("You must agree to the terms to submit a request.");
+        return;
+    }
+
     const data = new FormData();
-    data.append("tenantId", 1); // Placeholder
+    data.append("tenantId", 1); // Placeholder - TODO: Replace with authenticated user ID
     data.append("title", formData.title);
     data.append("description", formData.description);
     data.append("category", formData.category);
@@ -45,18 +51,20 @@ const Maintenance2 = () => {
     }
 
     try {
-      const response = await axios.post("/api/maintenance/submit", data, {
-        headers: {
-          'Content-Type': 'multipart/form-data' 
-        }
-      });
+        // FIX 1: Corrected POST URL to align with backend router.post('/')
+        const response = await axios.post("/api/maintenance", data, {
+            headers: {
+              'Content-Type': 'multipart/form-data' 
+            }
+        });
       
-      alert(`Maintenance request submitted successfully! ID: MR-${response.data.request.id}`);
-      navigate("/maintenance"); 
+        // FIX 2: Corrected response key to 'data' to match backend controller
+        alert(`Maintenance request submitted successfully! ID: MR-${response.data.data.id}`);
+        navigate("/maintenance"); 
 
     } catch (error) {
-      console.error('Submission failed:', error.response?.data || error.message);
-      alert(`Failed to submit request: ${error.response?.data?.error || 'Server error'}`);
+        console.error('Submission failed:', error.response?.data || error.message);
+        alert(`Failed to submit request: ${error.response?.data?.error || 'Server error'}`);
     }
   };
 
