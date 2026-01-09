@@ -1,27 +1,10 @@
-<<<<<<< Updated upstream
-const { Sequelize } = require('sequelize');
-const dotenv = require('dotenv');
-dotenv.config();
-
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT
-});
-
-sequelize.authenticate()
-    .then(() => console.log('Database connected...'))
-    .catch(err => console.log('Error: ' + err));
-
-module.exports = sequelize;
-=======
-// backend/db.js (Updated with Payment model)
-const { Sequelize, DataTypes } = require("sequelize");
-const UserModel = require("./models/User");
-const MaintenanceModelDefinition = require("./models/Maintenance");
-const TenantRequestModelDefinition = require("./models/TenantRequest");
-const PaymentModelDefinition = require("./models/Payment");
-
-require("dotenv").config();
+// backend/db.js (Resolved - Final Version)
+const { Sequelize, DataTypes } = require('sequelize');
+const UserModel = require('./models/User');
+const MaintenanceModelDefinition = require('./models/Maintenance');
+const TenantRequestModelDefinition = require('./models/TenantRequest');
+const PaymentModelDefinition = require('./models/Payment');
+require('dotenv').config();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -29,7 +12,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT || "mysql",
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: false,
   }
 );
@@ -42,15 +25,15 @@ const Payment = PaymentModelDefinition(sequelize, DataTypes);
 
 // Define Associations
 User.hasMany(Maintenance, {
-  foreignKey: "userId",
-  as: "maintenanceRequests",
+  foreignKey: 'userId',
+  as: 'maintenanceRequests',
 });
-Maintenance.belongsTo(User, { foreignKey: "userId", as: "tenant" });
+Maintenance.belongsTo(User, { foreignKey: 'userId', as: 'tenant' });
 
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Database connected successfully");
+    console.log('✅ Database connected successfully');
 
     // Synchronize tables
     await User.sync({ alter: true });
@@ -58,9 +41,9 @@ const connectDB = async () => {
     await TenantRequest.sync({ alter: true });
     await Payment.sync({ alter: true });
 
-    console.log("✅ Tables created/updated successfully.");
+    console.log('✅ Tables created/updated successfully.');
   } catch (error) {
-    console.error("❌ Database connection failed:", error);
+    console.error('❌ Database connection failed:', error);
     process.exit(1);
   }
 };
@@ -74,4 +57,3 @@ module.exports = {
   TenantRequest,
   Payment,
 };
->>>>>>> Stashed changes

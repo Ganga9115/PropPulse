@@ -1,0 +1,88 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background-color: #0b1a3d;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.popup-content h4 {
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1em;
+  color: #c9d6e5;
+  margin-bottom: 0.5rem;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e6eefc;
+  color: #0b1a3d;
+  font-size: 1em;
+}
+
+.input-with-icon .icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  /* Make the icon non-interactive so the input is clickable */
+  pointer-events: none;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-submit {
+  padding: 12px 2.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #0e1e47; 
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:hover {
+  background-color: #172a55;
+}

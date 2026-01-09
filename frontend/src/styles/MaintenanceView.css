@@ -1,25 +1,41 @@
+/* =======================================================
+   1. CORE LAYOUT (Consistency & Efficiency)
+   ======================================================= */
 .maintenance-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
   background: #fff;
-  font-family: "Segoe UI", sans-serif;
-}
-.dashboard {
-  flex: 1;
-  background-color: #f9fafb; /* light gray */
-  padding: 5px 22px;
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* Unified Font Stack for consistency */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; 
 }
 
-/* Header Section */
-.dashboard-header {
-  background-color: #dce8f8;
-  padding: 30px 44px;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+.dashboard {
+  flex: 1;
+  background-color: #f9fafb; 
+  padding: 5px 22px;
+  min-height: 100vh; 
+  min-width: 100vh; /* Retained, though parent is sufficient */
+  font-family: inherit; /* Inherit from maintenance-container */
 }
+
+
+/* =======================================================
+   2. DASHBOARD HEADER (To match the white card in the image)
+   ======================================================= */
+.dashboard-header {
+  /* BACKGROUND: Changed from blue (#dce8f8) to white to match the screenshot's "Hello Tenant!" card */
+  background-color: #fff; 
+  /* PADDING: Slightly reduced horizontal padding for better fit on various screens */
+  padding: 30px 50px; 
+  border-radius: 12px;
+  /* SHADOW: Slightly adjusted for a prominent card look */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px;
+  /* NEW: Optional blue strip at the top to retain some blue accent */
+  border-top: 5px solid #dce8f8; 
+}
+
 
 .dashboard-header h1 {
   font-size: 30px;
@@ -33,13 +49,30 @@
   font-size: 20px;
 }
 
-/* Main content */
+
+/* =======================================================
+   3. CONTENT HEADER (Alignment & Illustration)
+   ======================================================= */
 .maintenance-content {
   flex: 1;
-  padding: 20px 40px;
+  padding: 20px 60px; 
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header */
+.header-and-illustration {
+    display: flex;
+    justify-content: space-between; 
+    /* FIX: Changed to align-items: center to vertically center the gear illustration */
+    align-items: center; 
+    margin-bottom: 20px;
+}
+
+
+.maintenance-header {
+    flex-grow: 1; 
+}
+
 .maintenance-header h2 {
   font-size: 28px;
   font-weight: 700;
@@ -75,24 +108,12 @@
   color: #000;
 }
 
-/* Filters */
-.filters {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.filters select,
-.filters input {
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  flex: 1;
-}
-
-/* Legend */
+/* =======================================================
+   4. LEGEND (Status Color Consistency)
+   ======================================================= */
 .legend {
-  margin: 10px 0 20px;
+  /* FIX: Reduced top margin, relying on margin-bottom of the paragraph above */
+  margin: 0 0 20px; 
   display: flex;
   gap: 15px;
 }
@@ -104,35 +125,52 @@
   border: 2px dashed;
 }
 
-.legend .pending {
-  border-color: orange;
-  color: orange;
+.legend .open { 
+  border-color: #4CAF50; 
+  color: #4CAF50;
 }
 
-.legend .progress {
-  border-color: blueviolet;
-  color: blueviolet;
+.legend .assigned { 
+  border-color: #1976d2; 
+  color: #1976d2;
+}
+
+.legend .in-progress {
+  border-color: #ff9800;
+  color: #ff9800;
 }
 
 .legend .completed {
-  border-color: green;
-  color: green;
+  /* FIX: Using a specific hex code for consistency with other status colors */
+  border-color: #4CAF50; 
+  color: #4CAF50; 
 }
 
-/* Request Card */
+/* =======================================================
+   5. REQUEST CARDS (Header & Status Badge Clicks)
+   ======================================================= */
+.request-list {
+  width: 100%; 
+  display: flex;
+  flex-direction: column; 
+  gap: 0px; 
+}
+
 .request-card {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-  margin-top: 3px;
+  padding: 0; 
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .request-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1d1d4f;
+  /* FIX: Changed from dark blue (#1d1d4f) to dark gray/black to better match the screenshot */
+  background: #222; 
   color: #fff;
   padding: 8px 22px;
   border-radius: 6px 6px 0 0;
@@ -143,16 +181,33 @@
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
+  border: none;
+  /* FIX: Removed cursor: pointer; assuming status badges are indicators, not buttons */
+  cursor: default; 
 }
 
-.in-progress {
+.status-badge.in-progress {
   background: #ff9800;
   color: #fff;
 }
 
+.status-badge.open {
+  background: #4CAF50; 
+  color: #fff;
+}
+
+.status-badge.assigned {
+  background: #1976d2; 
+  color: #fff;
+}
+
 .request-body {
-  padding: 45px;
-  font-size: 14px;
+  padding: 15px 25px; 
+  font-size: 15px;
+}
+
+.request-body p {
+  margin: 4px 0; 
 }
 
 .request-title {
@@ -161,31 +216,29 @@
 }
 
 
-
-/* Put request card + image in one row */
-.request-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  margin-top: 10px;
-}
-
-/* Make request card flexible */
-.request-card {
-  flex: 1;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  padding: 0; /* remove extra padding since header has bg */
-}
-
-/* Illustration styling */
+/* =======================================================
+   6. ILLUSTRATION & MISC
+   ======================================================= */
 .illustration {
   flex-shrink: 0;
+  padding-left: 20px; 
+  padding-top: 0; 
 }
 
 .illustration img {
-  max-width: 250px;
+  max-width: 150px; 
   height: auto;
+}
+
+.request-section {
+  display: block; 
+  margin-top: 0;
+}
+
+.filters select,
+.filters input {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  flex: 1;
 }

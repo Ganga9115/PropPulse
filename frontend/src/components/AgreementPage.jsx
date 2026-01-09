@@ -7,12 +7,9 @@ const AgreementPage = () => {
   const navigate = useNavigate();
 
   const handleAgreeClick = () => {
-    if (isChecked) {
-      // Navigate to the success page
-      navigate('/request-submitted');
-    } else {
+    
       alert("Please confirm that you have read and agreed to the Terms & Conditions.");
-    }
+
   };
 
   return (

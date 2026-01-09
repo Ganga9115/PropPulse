@@ -1,0 +1,166 @@
+/* General Layout */
+.main-content {
+  background-color: #f0f4f8; /* A light greyish background */
+  color: #333;
+  font-family: Arial, sans-serif;
+  padding: 2rem 3rem;
+  flex-grow: 1;
+}
+
+/* Header Container */
+.header-container {
+  background-color: #e6eefc; /* Light blue background for the header area */
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem; /* Add a space between the header and the filter bar */
+  border-radius: 8px;
+}
+
+.page-header-title {
+  color: #0b1a3d; /* Dark blue color for the title */
+  margin: 0; /* Remove default margin */
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+/* Search and Filter Section */
+.search-filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Removed padding and background to make it a separate block */
+}
+
+.search-bar {
+  position: relative;
+  flex-grow: 1;
+  margin-right: 2rem;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  border-radius: 8px;
+  border: 1px solid #c9d6e5;
+  background-color: #fff;
+  color: #333;
+  font-size: 1em;
+}
+
+.filter-dropdowns-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-select {
+  padding: 12px 12px;
+  border-radius: 8px;
+  border: 1px solid #c9d6e5;
+  background-color: #fff;
+  color: #333;
+  font-size: 1em;
+}
+
+.date-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #c9d6e5;
+}
+
+.date-input-container label {
+  font-size: 1em;
+  color: #555;
+}
+
+.date-input {
+  border: none;
+  background: transparent;
+  color: #333;
+  font-size: 1em;
+}
+
+/* Tabular and Summary Sections (same as before) */
+.table-section {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem; /* Add a top margin to separate it from the filter bar */
+}
+
+.table-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payment-table th, .payment-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.payment-table th {
+  color: #6c757d;
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
+
+.status {
+  position: relative;
+  padding-left: 20px;
+}
+
+.status::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status.paid::before {
+  background-color: #28a745;
+}
+
+.status.unpaid::before {
+  background-color: #dc3545;
+}
+
+.summary-section {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.summary-section p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}

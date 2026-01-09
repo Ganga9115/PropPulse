@@ -1,14 +1,29 @@
-.unit-details-page-container {
-  padding: 2rem;
-  background-color: #f0f2f5;
-  min-height: 100vh;
+/* Reset browser defaults so the background really covers the screen */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
+/* Main wrapper spans the whole viewport */
+.unit-details-page-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  box-sizing: border-box; /* padding won’t add to width */
+}
+
+/* Header section */
 .page-header-section {
   background-color: #d1d8e0;
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header-title {
@@ -24,11 +39,14 @@
   margin-top: 0.5rem;
 }
 
+/* Unit details block */
 .unit-details-section {
   background-color: #d1d8e0;
   border-radius: 15px;
-  padding: 0.5rem;
+  padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-heading {
@@ -38,15 +56,19 @@
   margin-bottom: 2rem;
 }
 
+/* Card with image + info */
 .unit-details-card {
   background-color: #fff;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .image-and-details {
   display: flex;
+  flex-wrap: wrap;         /* allow wrap on small screens */
   gap: 2rem;
   align-items: flex-start;
   margin-bottom: 2rem;
@@ -54,7 +76,7 @@
 
 .unit-details-image {
   width: 300px;
-  height: auto;
+  max-width: 100%;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,12 +85,15 @@
 .details-list {
   font-size: 1.1rem;
   line-height: 3.5;
+  flex: 1;                 /* take remaining space */
+  box-sizing: border-box;
 }
 
 .details-list b {
   color: #5d5d81;
 }
 
+/* Button fills available width */
 .request-service-button {
   width: 100%;
   padding: 1rem;
